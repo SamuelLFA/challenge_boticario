@@ -11,12 +11,14 @@ class ResellerService(
 
     fun saveReseller(reseller: Reseller) {
         val resellerWithEncodedPassword = reseller.copy(
-            password = passwordEncoder.encode(reseller.password)
+            passwordHashed = passwordEncoder.encode(reseller.password)
         )
         resellerRepository.save(resellerWithEncodedPassword)
     }
 
-    fun getResellerByDocument(document: String): Reseller? {
-        return resellerRepository.getByDocument(document)
-    }
+    fun getResellerByDocument(document: String): Reseller? =
+        resellerRepository.getByDocument(document)
+
+    fun getResellerByEmail(email: String): Reseller? =
+        resellerRepository.getByEmail(email)
 }

@@ -31,7 +31,7 @@ data class ResellerPostRequestDTO (
             name = name!!,
             document = document!!,
             email = email!!,
-            password = password!!
+            passwordHashed = password!!
         )
     }
 }
