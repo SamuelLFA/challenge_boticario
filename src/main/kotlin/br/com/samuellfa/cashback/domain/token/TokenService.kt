@@ -12,10 +12,10 @@ import java.util.*
 class TokenService {
 
     @Value("\${TOKEN_EXPIRATION}")
-    private lateinit var expiration: String
+    lateinit var expiration: String
 
     @Value("\${TOKEN_SECRET}")
-    private lateinit var secret: String
+    lateinit var secret: String
 
     fun createToken(authentication: Authentication): String {
 

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service
 class OrderService (
     val orderRepository: OrderRepository
 ) {
-    val DOCUMENTS = listOf("15350946056")
+    val documents: List<String>
+        get() = listOf("15350946056")
 
     fun getAll(): List<Order> = orderRepository.findAll()
 
@@ -16,7 +17,7 @@ class OrderService (
     }
 
     private fun exceptionCase(order: Order): Order =
-        order.copy(status = Status.APPROVED)
-            .takeIf { DOCUMENTS.contains(order.reseller?.document) }
-            ?: order
+        order.takeIf {
+            !documents.contains(order.reseller?.document)
+        } ?: order.copy(status = Status.APPROVED)
 }
